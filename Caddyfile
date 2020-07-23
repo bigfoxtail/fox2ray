@@ -1,0 +1,13 @@
+{
+    storage file_system {
+        root /docker_data/caddy
+    }
+}
+CADDY_DOMAIN {
+    log {
+        output file /var/log/caddy.log
+    }
+    reverse_proxy /line 127.0.0.1:10000
+    root * /site
+    file_server
+}
