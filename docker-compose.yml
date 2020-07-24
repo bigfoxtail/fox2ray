@@ -27,3 +27,4 @@ services:
       - ./server/Caddyfile:/etc/caddy/Caddyfile
       - ./site:/site
       - ./server/caddy_data:/data
+      - caddy-volume:/config
