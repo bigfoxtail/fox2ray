@@ -9,10 +9,13 @@ cp Caddyfile ./server/Caddyfile
 cp trojan_run.sh ./server/trojan_run.sh
 
 DOMAIN=www.test.com
-V2RAY_UUID=69f9d2f3-89af-4d39-b80c-d4c0c7116086
+V2RAY_UUID=e7ccee8e-a760-40cb-bb48-ef9f4666918d
+Trojan_PASSWORD1=ef9f4666918d
+Trojan_PASSWORD2=ef9f4666918d
 Trojan_PORT=444
-Trojan_PASSWORD1=ca95a6c31305
-Trojan_PASSWORD2=ca95a6c31305
+if [ -f ./fox2ray.properties ]; then
+    . ./fox2ray.properties
+fi
 
 Trojan_CRTPATH=./server/caddy_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/$DOMAIN
 
