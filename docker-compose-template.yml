@@ -28,3 +28,17 @@ services:
       - ./site:/site
       - ./server/caddy_data:/data
       - caddy-volume:/config
+
+  trojangfw:
+    image: trojangfw/trojan
+    container_name: trojan
+    restart: always
+    depends_on: 
+      - "caddy"
+    ports:
+      - 'Trojan_PORT:443'
+    volumes:
+      - ./server/trojan_run.sh:/config/trojan_run.sh
+      - ./server/trojan_server.json:/config/config.json
+      - Trojan_CRTPATH:/config/certificates
+    command: /config/trojan_run.sh
