@@ -18,3 +18,5 @@ sudo docker run -d -p 80:80 -p 443:443 -p 10001:10001 \
 -v /home/docker_data:/docker_data \
 bigfoxtail/fox2ray
 ```
+
+## 集成caddy和V2ray，实际上并不会方便多少，故不在更新。
