@@ -1,20 +1,18 @@
 # fox2ray
 
 
-使用命令`mkdir -p /home/docker_data`创建该docker的数据存储文件夹，申请完成的HTTPS证书将存放在这里
+#### 使用官方镜像集成，结构简洁，可随时跟随官方进行更新。
 
-使用`uuidgen`生成UUID
+#### 使用说明：
 
-使用UUID替换命令中V2RAY_UUID的值
+端口80，443默认由caddy使用；trojan未配置共用端口，默认使用444。
 
-使用自己的域名替换命令中CADDY_DOMAIN的值
+caddy启动后自动申请证书；V2ray连接路径为`/line`。
 
-执行以下命令
-```
-sudo docker run -d -p 80:80 -p 443:443 -p 10001:10001 \
---env V2RAY_UUID=69f9d2f3-89af-4d39-b80c-d4c0c7116086 \
---env CADDY_DOMAIN=www.test.com \
---name=fox2ray --restart=always \
--v /home/docker_data:/docker_data \
-bigfoxtail/fox2ray
-```
+运行使用的主要配置文件保存在`server`文件夹下。
+
+安装docker和docker-compose。
+
+修改`fox2ray.properties`文件中的参数，运行`./init.sh`进行配置文件初始化。
+
+使用命令`sudo docker-compose up -d`启动相关服务。
