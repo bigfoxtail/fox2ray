@@ -40,6 +40,7 @@ function start_menu(){
     green " 2. 启动 fox2ray"
     green " 3. 停止 fox2ray"
     green " 4. 更新 fox2ray"
+    green " 5. 移除 fox2ray"
     yellow " 0. Exit"
     echo
     read -p "输入数字:" num
@@ -59,6 +60,9 @@ function start_menu(){
     docker-compose -f ./server/docker-compose.yml -p "fox2ray" pull
     docker-compose -f ./server/docker-compose.yml -p "fox2ray" up -d
     ;;
+    5)
+    docker-compose -f ./server/docker-compose.yml -p "fox2ray" down
+    ;;
     0)
     exit 1
     ;;
@@ -69,6 +73,7 @@ function start_menu(){
     start_menu
     ;;
     esac
+    start_menu
 }
 
 start_menu
