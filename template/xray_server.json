@@ -1,0 +1,72 @@
+{
+    "log": {
+        "access": "none",
+        "error": "/var/log/xray_error.log",
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "Xray_UUID",
+                        "flow": "xtls-rprx-direct"
+                    }
+                ],
+                "decryption": "none",
+                "fallbacks": [
+                    {
+                        "path": "/line",
+                        "dest": "@/tmp/xray/ws.sock"
+                    },
+                    {
+                        "dest": "caddy:80"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "xtls",
+                "xtlsSettings": {
+                    "alpn": [
+                        "h2",
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/path/to/certificate.crt",
+                            "keyFile": "/path/to/private.key",
+                            "ocspStapling": 3600
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "listen": "@/tmp/xray/ws.sock",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "Xray_UUID",
+                        "alterId": 100
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/line"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {}
+        }
+    ]
+}

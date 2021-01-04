@@ -5,4 +5,4 @@ do
     sleep 2
 done
 echo "Start Server"
-trojan config.json
+/usr/bin/xray -config /etc/xray/config.json

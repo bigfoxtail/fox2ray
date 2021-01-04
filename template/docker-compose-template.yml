@@ -1,0 +1,34 @@
+version: '3.7'
+
+volumes:
+  caddy-volume:
+  xray-volume:
+
+services:
+  caddy:
+    build:
+      context: ./caddy-docker
+    container_name: caddy
+    restart: always
+    ports:
+      - '80:80'
+    volumes:
+      - ./site:/site
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_data:/data
+      - caddy-volume:/config
+
+  xray:
+    image: teddysun/xray
+    container_name: xray
+    restart: always
+    depends_on: 
+      - "caddy"
+    ports:
+      - '443:443'
+    volumes:
+      - Xray_CERTPATH:/config/certificates
+      - ./xray_run.sh:/etc/xray/xray_run.sh
+      - ./xray_server.json:/etc/xray/config.json
+      - xray-volume:/etc/xray
+    command: /etc/xray/xray_run.sh

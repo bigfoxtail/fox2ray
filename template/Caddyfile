@@ -1,0 +1,15 @@
+{
+    auto_https disable_redirects
+    servers {
+    	protocol {
+	    allow_h2c
+    	}
+    }
+}
+CADDY_DOMAIN:80, CADDY_DOMAIN:443 {
+    log {
+        output file /var/log/caddy.log
+    }
+    root * /site
+    file_server
+}
