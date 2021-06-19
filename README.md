@@ -18,3 +18,5 @@ caddy启动后自动申请证书；提供XTLS+VLESS和WS+VMess两种连接方式
 修改`fox2ray.properties`文件中的参数，运行`./init.sh`进行配置文件初始化。
 
 使用命令`./fox2ray.sh`启动相关服务。
+
+默认屏蔽国内网站
