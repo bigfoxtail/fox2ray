@@ -56,8 +56,8 @@ function start_menu(){
     docker-compose -f ./server/docker-compose.yml -p "fox2ray" stop
     ;;
     4)
-    docker-compose -f ./server/docker-compose.yml -p "fox2ray" down
     docker-compose -f ./server/docker-compose.yml -p "fox2ray" pull
+    docker-compose -f ./server/docker-compose.yml -p "fox2ray" down
     docker-compose -f ./server/docker-compose.yml -p "fox2ray" up -d
     ;;
     5)

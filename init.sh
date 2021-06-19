@@ -15,13 +15,13 @@ if [ -f ./fox2ray.properties ]; then
     . ./fox2ray.properties
 fi
 
-Xray_CERTPATH=./caddy_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/$DOMAIN
+Xray_CERTPATH=./caddy_data/caddy/certificates/
 
 sed -i "s/CADDY_DOMAIN/$DOMAIN/g" ./server/Caddyfile
 sed -i "s/Xray_UUID/$Xray_UUID/g" ./server/xray_server.json
-Xray_SSLCERT=/config/certificates/$DOMAIN.crt
-Xray_SSLKEY=/config/certificates/$DOMAIN.key
-sed -i "s#/path/to/certificate.crt#$Xray_SSLCERT#" ./server/xray_server.json
-sed -i "s#/path/to/private.key#$Xray_SSLKEY#" ./server/xray_server.json
+#Xray_SSLCERT=/config/certificates/$DOMAIN.crt
+#Xray_SSLKEY=/config/certificates/$DOMAIN.key
+#sed -i "s#/path/to/certificate.crt#$Xray_SSLCERT#" ./server/xray_server.json
+#sed -i "s#/path/to/private.key#$Xray_SSLKEY#" ./server/xray_server.json
 sed -i "s#Xray_CERTPATH#$Xray_CERTPATH#" ./server/docker-compose.yml
 sed -i "s/CADDY_DOMAIN/$DOMAIN/" ./server/xray_run.sh
