@@ -6,7 +6,7 @@
     	}
     }
 }
-CADDY_DOMAIN:80, CADDY_DOMAIN:443 {
+http://CADDY_DOMAIN:80, https://CADDY_DOMAIN:443 {
     log {
         output file /var/log/caddy.log
     }
