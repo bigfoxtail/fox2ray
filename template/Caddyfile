@@ -1,14 +1,31 @@
 {
     auto_https disable_redirects
+    order replace after encode
     servers {
-    	protocol {
-	    allow_h2c
-    	}
+        protocol {
+            allow_h2c
+        }
     }
 }
 http://CADDY_DOMAIN:80, https://CADDY_DOMAIN:443 {
     log {
         output file /var/log/caddy.log
+    }
+    route /portainer/* {
+        uri strip_prefix /portainer_my
+        reverse_proxy portainer:9000
+    }
+    route /zerotier/* {
+        uri strip_prefix /zerotier
+        replace {
+            "href=\"/" "href=\"/zerotier/"
+            "src=\"/" "src=\"/zerotier/"
+            "action=\"/" "action=\"/zerotier/"
+            "url = \"/" "url=\"/zerotier/"
+        }
+        reverse_proxy ztncui:4000 { 
+            header_down Location ^/  /zerotier/
+        }
     }
     root * /site
     file_server

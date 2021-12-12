@@ -5,7 +5,7 @@
 
 ### 使用说明：
 
-caddy版本默认使用2.3，在本地进行构建。
+caddy使用添加`replace-response`模块构建的镜像，也可以使用本地构建（需要大量内存）。
 
 端口80默认由caddy使用，提供证书和伪装服务；443由xray使用，提供数据传输和回落伪装。
 
@@ -19,4 +19,7 @@ caddy启动后自动申请证书；提供XTLS+VLESS和WS+VMess两种连接方式
 
 使用命令`./fox2ray.sh`启动相关服务。
 
-默认屏蔽国内网站
+默认屏蔽国内网站。
+
+运行template文件夹`install_update-portainer`安装或更新portainer。
+运行template文件夹`install_update-ztncui.sh`安装或更新zerotier。
