@@ -1,3 +1,5 @@
+#!/bin/sh
+
 Color_Text()
 {
   echo -e " \e[0;$2m$1\e[0m"
@@ -30,20 +32,24 @@ if [ $? -ne 0 ]; then
         docker network create fox2ray_default
 fi
 Echo_Green 'check container'
-docker ps | grep portainer > /dev/null
+docker ps | grep ztncui > /dev/null
 if [ $? -eq 0 ]; then
-        Echo_Green 'rm container'
-        docker stop portainer
-        docker rm portainer
+        Echo_Green 'rm ztncui'
+        docker stop ztncui
+        docker rm ztncui
 fi
 Echo_Green 'pull image'
-docker pull cr.portainer.io/portainer/portainer-ce
+docker pull keynetworks/ztncui
 Echo_Green 'run container'
-docker run -d --name portainer \
+docker run -d --name ztncui \
     --restart=always \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v portainer_data:/data \
-    cr.portainer.io/portainer/portainer-ce
+    -e HTTP_PORT=4000 \
+    -e HTTP_ALL_INTERFACES=yes \
+    -e ZTNCUI_PASSWD=1234567890! \
+    -v ztncui_etc:/opt/key-networks/ztncui/etc \
+    -v ztncui_zt1:/var/lib/zerotier-one \
+    keynetworks/ztncui
 Echo_Green 'join netwrok'
-docker network connect fox2ray_default portainer
+docker network connect fox2ray_default ztncui
 Echo_Green 'completed'
+Echo_Green 'default password: 1234567890!'
