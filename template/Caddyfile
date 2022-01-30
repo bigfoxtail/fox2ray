@@ -11,8 +11,8 @@ http://CADDY_DOMAIN:80, https://CADDY_DOMAIN:443 {
     log {
         output file /var/log/caddy.log
     }
-    route /portainer/* {
-        uri strip_prefix /portainer_my
+    route /my_portainer/* {
+        uri strip_prefix /my_portainer
         reverse_proxy portainer:9000
     }
     route /zerotier/* {

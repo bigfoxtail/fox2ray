@@ -62,7 +62,7 @@
                 "fallbacks": [
                     {
                         "path": "/line",
-                        "dest": "@/tmp/xray/ws.sock"
+                        "dest": "@/tmp/xray_ws.sock"
                     },
                     {
                         "dest": "caddy:80"
@@ -88,13 +88,13 @@
             }
         },
         {
-            "listen": "@/tmp/xray/ws.sock",
+            "listen": "@/tmp/xray_ws.sock",
             "protocol": "vmess",
             "settings": {
                 "clients": [
                     {
                         "id": "Xray_UUID",
-                        "alterId": 100
+                        "alterId": 0
                     }
                 ]
             },
