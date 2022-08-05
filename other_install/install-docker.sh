@@ -1,11 +1,16 @@
 #!/bin/sh
 
+if ! [ -x "$(command -v curl)" ]; then
+  echo "curl could not be found"
+  exit 1
+fi
+
 echo "docker install"
 curl -fsSL https://get.docker.com | sh
 
 echo "docker-compose install"
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
 echo "compose V2 install"

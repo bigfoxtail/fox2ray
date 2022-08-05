@@ -36,18 +36,23 @@ docker ps | grep ztncui > /dev/null
 if [ $? -eq 0 ]; then
         Echo_Green 'rm ztncui'
         docker stop ztncui
-        docker rm ztncui
+        docker rm -f ztncui
 fi
 Echo_Green 'pull image'
 docker pull keynetworks/ztncui
 Echo_Green 'run container'
+
+cur_path=$(cd `dirname $0`;pwd)
 docker run -d --name ztncui \
     --restart=always \
+    -p 9993:9993 \
+    -p 9993:9993/udp \
+    -p 4000:4000 \
     -e HTTP_PORT=4000 \
     -e HTTP_ALL_INTERFACES=yes \
     -e ZTNCUI_PASSWD=1234567890! \
-    -v ztncui_etc:/opt/key-networks/ztncui/etc \
-    -v ztncui_zt1:/var/lib/zerotier-one \
+    -v ${cur_path}/ztncui_etc:/opt/key-networks/ztncui/etc \
+    -v ${cur_path}/ztncui_zt1:/var/lib/zerotier-one \
     keynetworks/ztncui
 Echo_Green 'join netwrok'
 docker network connect fox2ray_default ztncui
